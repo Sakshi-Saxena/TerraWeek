@@ -327,6 +327,9 @@ terraform plan \
 -var 'external_port=8000'
 ```
 
+<img width="1720" height="911" alt="image" src="https://github.com/user-attachments/assets/69ed678e-b81c-4d7d-b0a9-43efdcaff159" />
+
+
 ### Apply
 
 ```bash
@@ -335,11 +338,20 @@ terraform apply \
 -var 'external_port=8000'
 ```
 
+<img width="1720" height="911" alt="image" src="https://github.com/user-attachments/assets/912de62b-7602-4c2f-9f66-e1e87c80582b" />
+
+
 ### Check Outputs
 
 ```bash
 terraform output
 ```
+
+<img width="1600" height="616" alt="image" src="https://github.com/user-attachments/assets/ddcaea73-150f-4b9c-ab34-8fb06c4f0c9a" />
+
+
+<img width="1720" height="90" alt="image" src="https://github.com/user-attachments/assets/d489edd1-1c1f-4b1e-ab0f-bb0e64ce9b6c" />
+
 
 ### Destroy Resources
 
@@ -348,6 +360,9 @@ terraform destroy \
 -var 'container_name=sakshi-web' \
 -var 'external_port=8000'
 ```
+
+<img width="1720" height="892" alt="image" src="https://github.com/user-attachments/assets/780351d7-26ee-4e88-b947-f865a60c4dbe" />
+
 
 ---
 
