@@ -323,16 +323,16 @@ terraform init
 
 ```bash
 terraform plan \
--var 'container_name=tws-web' \
--var 'external_port=8080'
+-var 'container_name=sakshi-web' \
+-var 'external_port=8000'
 ```
 
 ### Apply
 
 ```bash
 terraform apply \
--var 'container_name=tws-web' \
--var 'external_port=8080'
+-var 'container_name=sakshi-web' \
+-var 'external_port=8000'
 ```
 
 ### Check Outputs
@@ -345,8 +345,8 @@ terraform output
 
 ```bash
 terraform destroy \
--var 'container_name=tws-web' \
--var 'external_port=8080'
+-var 'container_name=sakshi-web' \
+-var 'external_port=8000'
 ```
 
 ---
@@ -356,7 +356,7 @@ terraform destroy \
 Instead of:
 
 ```bash
--var 'container_name=tws-web'
+-var 'container_name=sakshi-web'
 ```
 
 I also learned that variables can be stored in:
@@ -364,15 +364,19 @@ I also learned that variables can be stored in:
 ```text
 terraform.tfvars
 ```
-###Outputs:
+### Outputs:
 
 <img width="1600" height="746" alt="image" src="https://github.com/user-attachments/assets/8fb16918-e5c5-4cb5-b81f-9ed1f5fef7ef" />
 
+
 <img width="1600" height="819" alt="image" src="https://github.com/user-attachments/assets/8098896a-f4ab-46fa-ac15-40c4a63dbf13" />
+
 
 <img width="1600" height="616" alt="image" src="https://github.com/user-attachments/assets/05c76c3c-defa-4de4-909f-80a65e412163" />
 
+
 <img width="1600" height="774" alt="image" src="https://github.com/user-attachments/assets/d0889278-cfaa-413e-af41-6e45244e7c54" />
+
 
 
 which makes commands cleaner and easier to manage.
