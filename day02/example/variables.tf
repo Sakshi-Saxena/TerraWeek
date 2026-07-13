@@ -8,7 +8,7 @@ variable "container_name" {
 variable "external_port" {
   description = "Host port to expose the container on."
   type        = number
-  default     = 8080
+  default     = 8000
 
   validation {
     condition     = var.external_port > 1024 && var.external_port < 65535
@@ -38,6 +38,6 @@ variable "extra_labels" {
   description = "Additional labels to attach to the container."
   type        = map(string)
   default = {
-    team = "trainwithshubham"
+    team = "sakshisaxenaa"
   }
 }
