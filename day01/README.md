@@ -1,91 +1,378 @@
-# 🌱 TerraWeek Day 1 — Introduction to IaC & Terraform Basics
+# 🌱 TerraWeek Day 01 – Introduction to IaC & Terraform Basics
 
-**Date:** Sunday, 12th July 2026
-
-Welcome to **Day 1** of the TerraWeek Challenge! Today is all about **foundations** — understanding *why* Infrastructure as Code exists, installing the **latest Terraform (v1.15.x)**, and running your very first `terraform apply`. 🚀
-
----
-
-## 🎯 Learning Goals
-
-By the end of today you should be able to:
-- Explain what **Infrastructure as Code (IaC)** is and why it matters.
-- Describe what **Terraform** is and how it fits into the DevOps workflow.
-- Install Terraform and verify it works.
-- Understand the **core Terraform workflow** and key terminology.
-- Provision your **first resource** — with zero cloud cost.
+> **Date:** 12 July 2026  
+> **Challenge:** #TerraWeekChallenge  
+> **Topic:** Introduction to Infrastructure as Code (IaC) & Terraform Fundamentals
 
 ---
 
-## 📝 Tasks
+# 📖 Overview
 
-### Task 1: Understand IaC & Terraform
-Write short answers (in your blog/notes) to:
-- What is **Infrastructure as Code**, and what problems does it solve compared to clicking around a cloud console?
-- What is **Terraform**, and why is it so popular? (Hint: declarative, provider-agnostic, huge ecosystem.)
-- **Terraform vs alternatives** — write one line each on how Terraform compares to **OpenTofu**, **Pulumi**, **CloudFormation**, and **Ansible**.
+Day 01 was all about building a strong foundation in **Infrastructure as Code (IaC)** and understanding how **Terraform** helps automate infrastructure provisioning.
 
-### Task 2: Install Terraform (latest version)
-- Install **Terraform ≥ 1.15** using the [official install guide](https://developer.hashicorp.com/terraform/install).
-- Verify your install and **paste the output** in your notes:
+Instead of manually creating infrastructure through a cloud console, I learned how to define infrastructure using code and follow the core Terraform workflow to provision resources in a consistent and repeatable manner.
+
+---
+
+# 🎯 Learning Objectives
+
+- Understand what **Infrastructure as Code (IaC)** is and why it matters.
+- Learn what **Terraform** is and why it is widely adopted.
+- Install and configure Terraform locally.
+- Understand Terraform's core terminology and workflow.
+- Provision my first resources using Terraform with zero cloud cost.
+
+---
+
+# 📝 Task 1: Understanding IaC & Terraform
+
+## What is Infrastructure as Code (IaC)?
+
+Infrastructure as Code (IaC) is the practice of managing and provisioning infrastructure through **code instead of manual configuration**.
+
+### Problems Solved by IaC
+
+✅ Eliminates repetitive manual tasks.
+
+✅ Reduces human errors.
+
+✅ Enables version control for infrastructure.
+
+✅ Makes infrastructure reproducible and consistent.
+
+✅ Speeds up environment provisioning.
+
+✅ Supports automation and CI/CD practices.
+
+---
+
+## What is Terraform?
+
+Terraform is an **open-source Infrastructure as Code tool developed by HashiCorp** that allows us to define, provision, and manage infrastructure using configuration files.
+
+### Why is Terraform so Popular?
+
+🌍 **Provider Agnostic** – Works with AWS, Azure, GCP, Kubernetes, Docker, and many more.
+
+📝 **Declarative** – Define the desired state and Terraform figures out how to achieve it.
+
+♻️ **Reusable** – Supports modules and reusable configurations.
+
+🔄 **Version Controlled** – Infrastructure can be managed like application code.
+
+🤝 **Large Ecosystem** – Thousands of providers and an active community.
+
+---
+
+## Terraform vs Alternatives
+
+### Terraform vs OpenTofu
+OpenTofu is the fully open-source fork of Terraform, while Terraform is developed and maintained by HashiCorp.
+
+### Terraform vs Pulumi
+Terraform uses HCL, whereas Pulumi allows infrastructure to be written using programming languages like Python, Go, and TypeScript.
+
+### Terraform vs CloudFormation
+Terraform supports multiple cloud providers, whereas CloudFormation is limited to AWS.
+
+### Terraform vs Ansible
+Terraform focuses on infrastructure provisioning, while Ansible focuses primarily on configuration management and application deployment.
+
+---
+
+# 📝 Task 2: Installing Terraform
+
+Installed Terraform locally on Ubuntu using the official HashiCorp installation guide.
+
+---
+
+## Verify Installation
+
+### Terraform Version
 
 ```bash
 terraform version
+```
+
+📸 **Screenshot Placeholder**
+
+![alt text](image.png)
+
+---
+
+### Terraform Help
+
+```bash
 terraform -help
 ```
-- Install the **HashiCorp Terraform** extension in VS Code for syntax highlighting and autocomplete.
 
-### Task 3: Learn 6 Crucial Terraform Terminologies
-Explain each of these **in your own words** with a one-line example:
-1. **Provider** — a plugin that lets Terraform talk to a platform (AWS, Azure, Docker…).
-2. **Resource** — a piece of infrastructure you want to create (an EC2 instance, an S3 bucket…).
-3. **State** — Terraform's record of what it manages (the `terraform.tfstate` file).
-4. **Plan** — a preview of the changes Terraform will make.
-5. **HCL** — HashiCorp Configuration Language, the syntax you write Terraform in.
-6. **Module** — a reusable, packaged group of Terraform configuration.
+---
 
-### Task 4: Your First Terraform Config (no cloud account needed!)
-Use the **starter code in [`./example`](./example)** — it uses the `local` and `random` providers, so it costs **nothing** and needs **no credentials**.
+## VS Code Extension Installed
 
-Run the **core Terraform workflow** and capture the output of each step:
+✅ HashiCorp Terraform Extension
+
+Features:
+
+- Syntax highlighting
+- Auto-completion
+- Formatting support
+- Better development experience
+
+---
+
+# 📝 Task 3: Learning 6 Crucial Terraform Terminologies
+
+## 1. Provider
+
+A plugin that enables Terraform to communicate with a platform or service.
+
+Example:
+
+```hcl
+provider "aws" {
+  region = "ap-south-1"
+}
+```
+
+---
+
+## 2. Resource
+
+A piece of infrastructure that Terraform manages.
+
+Example:
+
+```hcl
+resource "aws_s3_bucket" "demo" {
+  bucket = "my-demo-bucket"
+}
+```
+
+---
+
+## 3. State
+
+Terraform's record of the infrastructure it manages.
+
+Stored in:
+
+```text
+terraform.tfstate
+```
+
+---
+
+## 4. Plan
+
+A preview of the changes Terraform will make.
+
+Command:
+
 ```bash
-cd example
-terraform init      # download providers, initialize the working directory
-terraform fmt       # format your code
-terraform validate  # check for syntax errors
-terraform plan      # preview what will be created
-terraform apply     # create the resources (type: yes)
-cat greeting.txt    # see the file Terraform generated
-terraform destroy   # clean up (type: yes)
+terraform plan
 ```
 
 ---
 
-## 🔁 The Core Terraform Workflow
+## 5. HCL (HashiCorp Configuration Language)
 
+The language used to write Terraform configurations.
+
+Example:
+
+```hcl
+resource "random_pet" "name" {
+  length = 2
+}
 ```
-  Write  ──▶  Init  ──▶  Plan  ──▶  Apply  ──▶  Destroy
-  (.tf)     (init)     (preview)   (create)    (clean up)
+
+---
+
+## 6. Module
+
+A reusable collection of Terraform configurations.
+
+Example:
+
+```hcl
+module "networking" {
+  source = "./modules/networking"
+}
 ```
 
 ---
 
-## 🍫 Bonus (Brownie Points)
-- Set up **tab completion** for the Terraform CLI: `terraform -install-autocomplete`.
-- Try **[OpenTofu](https://opentofu.org/)** (the open-source fork) and note the differences.
-- Explore the `.terraform.lock.hcl` lock file that gets created — what is it for?
+# 📝 Task 4: My First Terraform Configuration
+
+For my first Terraform project, I used the **local** and **random** providers to create resources without requiring a cloud account or incurring any cost.
 
 ---
 
-## 📤 What to Submit
-- A blog / LinkedIn / X post with your learnings + screenshots of `terraform version` and a successful `apply`/`destroy`.
-- Push your code to your own **GitHub repo**.
-- Tag **#TrainWithShubham #TerraWeekChallenge** and share with your network.
+# 🔁 Core Terraform Workflow
+
+```text
+Write (.tf)
+      ↓
+terraform init
+      ↓
+terraform fmt
+      ↓
+terraform validate
+      ↓
+terraform plan
+      ↓
+terraform apply
+      ↓
+terraform destroy
+```
 
 ---
 
-📺 **Companion video:** [Terraform In One Shot](https://youtu.be/S9mohJI_R34) (watch the intro + install section)
-💻 **Companion code:** [terraform-for-devops](https://github.com/LondheShubham153/terraform-for-devops) — start with its [README](https://github.com/LondheShubham153/terraform-for-devops#readme)
-💬 Stuck? Ask in the [Discord](https://discord.gg/hs3Pmc5F) / [Telegram](https://t.me/trainwithshubham) community.
+## Initialize Terraform
 
-### Happy Terraforming! 🌍💻
+```bash
+terraform init
+```
+
+Downloads providers and initializes the working directory.
+
+📸 **Screenshot Placeholder**
+
+![alt text](image-1.png)
+
+---
+
+## Format Configuration Files
+
+```bash
+terraform fmt
+```
+
+Formats Terraform code according to standard conventions.
+
+---
+
+## Validate Configuration
+
+```bash
+terraform validate
+```
+
+Checks for syntax errors and configuration issues.
+
+---
+
+## Preview Infrastructure Changes
+
+```bash
+terraform plan
+```
+
+Shows the execution plan before creating resources.
+
+📸 **Screenshot Placeholder**
+
+![alt text](image-2.png)
+
+---
+
+## Create Infrastructure
+
+```bash
+terraform apply
+```
+
+Creates the resources defined in the configuration.
+
+📸 **Screenshot Placeholder**
+
+![alt text](image-3.png)
+
+---
+
+## Generated File
+
+```bash
+cat greeting.txt
+```
+
+Terraform generated a local file successfully.
+
+📸 **Screenshot Placeholder**
+
+![alt text](image-4.png)
+
+---
+
+## Clean Up Resources
+
+```bash
+terraform destroy
+```
+
+Removes all resources managed by Terraform.
+
+📸 **Screenshot Placeholder**
+
+![alt text](image-5.png)
+
+---
+
+# 🍫 Bonus Learnings
+
+## Terraform CLI Autocomplete
+
+```bash
+terraform -install-autocomplete
+```
+
+Provides tab completion support for Terraform commands.
+
+---
+
+## Exploring OpenTofu
+
+Learned that OpenTofu is the community-driven, fully open-source fork of Terraform.
+
+---
+
+## Understanding `.terraform.lock.hcl`
+
+This file locks provider versions and checksums to ensure:
+
+✅ Consistent environments
+
+✅ Reproducible builds
+
+✅ Stable CI/CD pipelines
+
+---
+
+# 🎯 Key Takeaways
+
+- Learned the fundamentals of Infrastructure as Code.
+- Understood why Terraform is one of the most popular IaC tools.
+- Installed and configured Terraform locally.
+- Learned the core Terraform workflow.
+- Explored important Terraform terminologies.
+- Created and destroyed my first infrastructure using Terraform.
+- Understood the purpose of provider lock files and version management.
+
+---
+
+# 🚀 Conclusion
+
+Day 01 laid the foundation for my Terraform journey. Understanding IaC and Terraform basics is the first step toward building scalable, automated, and reproducible infrastructure.
+
+> **"If infrastructure can be written as code, it can be automated, versioned, and reliably reproduced anywhere."**
+
+---
+
+## 🙏 Acknowledgements
+
+A huge thank you to **TrainWithShubham** and **Shubham Londhe** for organizing the **#TerraWeekChallenge** and making Terraform concepts easy to understand.
+
+---
+
+#Terraform #IaC #TerraformChallenge #TerraWeekChallenge #AWS #DevOps #CloudComputing #InfrastructureAsCode #TrainWithShubham
