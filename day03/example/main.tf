@@ -109,10 +109,12 @@ resource "aws_instance" "web" {
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.web.id]
 
+  user_data_replace_on_change = true
+
   user_data = <<-EOF
     #!/bin/bash
     dnf install -y nginx
-    echo "<h1>Hello from TerraWeek 2026 🚀</h1>" > /usr/share/nginx/html/index.html
+    echo "<h1>Hello from Sakshi! Welcome to Terraweek challenge 2026!!!</h1>" > /usr/share/nginx/html/index.html
     systemctl enable --now nginx
   EOF
 
