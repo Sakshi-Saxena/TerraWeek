@@ -274,31 +274,29 @@ terraform state list
 
 ### Terraform Plan
 
-> Add screenshot here.
+<img width="1600" height="651" alt="image" src="https://github.com/user-attachments/assets/7ec38b66-8abb-466e-9b74-9e97a902ae02" />
+
 
 ---
 
 ### Terraform Apply
 
-> Add screenshot here.
+<img width="1400" height="763" alt="image" src="https://github.com/user-attachments/assets/85e828b4-2f36-4655-a84b-337e805d369e" />
 
----
-
-### Terraform State List
-
-> Add screenshot here.
 
 ---
 
 ### Running EC2 Instance
 
-> Add screenshot here.
+<img width="1065" height="96" alt="image" src="https://github.com/user-attachments/assets/fff46618-07bc-4eba-ae1e-8c93a67e82dd" />
+
 
 ---
 
 ### Nginx Welcome Page
 
-> Add screenshot here.
+
+<img width="1141" height="449" alt="image" src="https://github.com/user-attachments/assets/fb5dfb3a-e126-4a82-96c6-09fc81ab2aee" />
 
 ---
 
@@ -475,15 +473,10 @@ This helps avoid unexpected AWS charges.
 
 ## 📸 Screenshots
 
-### Update Plan Diff
-
-> Add screenshot here.
-
----
-
 ### Terraform Destroy
 
-> Add screenshot here.
+<img width="1400" height="873" alt="image" src="https://github.com/user-attachments/assets/7d611efb-8548-45f4-83a6-7ef175bbea20" />
+
 
 ---
 
