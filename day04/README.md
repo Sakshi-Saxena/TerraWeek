@@ -213,35 +213,13 @@ Displays the current state in a readable format.
 
 # 📸 Screenshots
 
-### terraform state list
-
 > Add screenshot here.
 
----
+<img width="1600" height="722" alt="image" src="https://github.com/user-attachments/assets/21a039f8-080f-42bb-a15d-569bb33a7899" />
 
-### terraform state show
 
-> Add screenshot here.
+<img width="1600" height="421" alt="image" src="https://github.com/user-attachments/assets/6b9d9d45-cf6e-49d5-b9b5-24eafcbe801c" />
 
----
-
-### terraform state mv
-
-> Add screenshot here.
-
----
-
-### terraform state rm
-
-> Add screenshot here.
-
----
-
-### terraform show
-
-> Add screenshot here.
-
----
 
 # 📝 Task 3: Bootstrap Backend Infrastructure
 
@@ -281,13 +259,21 @@ The backend infrastructure must be created first.
 
 ### Backend Infrastructure Apply
 
-> Add screenshot here.
+<img width="1600" height="345" alt="image" src="https://github.com/user-attachments/assets/048120a6-b224-49cd-89d6-ac5049181541" />
+
+<img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/66f31f59-77e5-4c26-bc29-3594625765ee" />
+
+
+<img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/9d334137-f7ea-45fd-b467-80783b59f750" />
+
+
 
 ---
 
 ### S3 Bucket in AWS Console
 
-> Add screenshot here.
+<img width="1030" height="374" alt="image" src="https://github.com/user-attachments/assets/9de1c041-a725-45c7-a3d2-f4c485efda22" />
+
 
 ---
 
@@ -363,25 +349,17 @@ Verified:
 
 ### Backend Configuration
 
-> Add screenshot here.
+<img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/df58bbe5-7155-4411-9b23-7023853e8604" />
 
----
+<img width="1600" height="557" alt="image" src="https://github.com/user-attachments/assets/33dcde13-57c7-42ce-afde-60b58636dabf" />
 
-### State Migration
-
-> Add screenshot here.
 
 ---
 
 ### terraform.tfstate in S3
 
-> Add screenshot here.
+<img width="1600" height="397" alt="image" src="https://github.com/user-attachments/assets/80ed9860-e1d8-4805-b106-2af86b40a0e8" />
 
----
-
-### .tflock File
-
-> Add screenshot here.
 
 ---
 
@@ -437,35 +415,15 @@ Terraform can:
 
 # 📸 Screenshots
 
-### Manually Created S3 Bucket
-
-> Add screenshot here.
-
 ---
 
 ### Import Plan
 
-> Add screenshot here.
+
+<img width="1747" height="764" alt="image" src="https://github.com/user-attachments/assets/c52b0772-3f6f-41e5-932d-a44946066772" />
 
 ---
 
-### generated.tf
-
-> Add screenshot here.
-
----
-
-### Terraform Apply
-
-> Add screenshot here.
-
----
-
-### terraform state list
-
-> Add screenshot here.
-
----
 
 # 🍫 Bonus Learnings
 
