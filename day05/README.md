@@ -197,25 +197,29 @@ terraform destroy
 
 ### Module Initialization
 
-> Add screenshot here.
+<img width="1600" height="456" alt="image" src="https://github.com/user-attachments/assets/a0244fe3-b846-43a7-a293-83f7bd02a52d" />
+
 
 ---
 
 ### Terraform Plan
 
-> Add screenshot here.
+<img width="1600" height="612" alt="image" src="https://github.com/user-attachments/assets/6fecba59-63a8-44cd-9805-d1b09941954c" />
 
 ---
 
 ### Terraform Apply
 
-> Add screenshot here.
+<img width="1600" height="612" alt="image" src="https://github.com/user-attachments/assets/d2c7e456-57a2-4dc4-bc59-9e0689882c75" />
+
+<img width="1536" height="708" alt="image" src="https://github.com/user-attachments/assets/a971c43f-09c6-477e-805b-590ab91eb129" />
+
 
 ---
 
 ### Terraform Destroy
 
-> Add screenshot here.
+<img width="1536" height="708" alt="image" src="https://github.com/user-attachments/assets/94522fd7-c798-4235-a7b7-fbe9aa35550a" />
 
 ---
 
@@ -261,19 +265,21 @@ This makes infrastructure easier to scale and maintain.
 
 ### Terraform Plan with Multiple Modules
 
-> Add screenshot here.
+<img width="1536" height="708" alt="image" src="https://github.com/user-attachments/assets/145ec65b-5b59-4936-a639-cf94e4f383fa" />
+
 
 ---
 
 ### Terraform Apply
 
-> Add screenshot here.
+<img width="1536" height="708" alt="image" src="https://github.com/user-attachments/assets/53b28e46-43d0-462b-8a8a-78387a49a035" />
 
 ---
 
 ### AWS Console
 
-> Add screenshot here.
+
+<img width="1536" height="708" alt="image" src="https://github.com/user-attachments/assets/3184a891-53d7-4fce-a81f-18275b3803b5" />
 
 ---
 
@@ -355,25 +361,29 @@ Does NOT allow:
 
 ### Module Download During terraform init
 
-> Add screenshot here.
+<img width="1536" height="376" alt="image" src="https://github.com/user-attachments/assets/55205ecb-d638-49db-9c3f-84256ae634db" />
+
 
 ---
 
 ### Terraform Plan
 
-> Add screenshot here.
+<img width="1536" height="466" alt="image" src="https://github.com/user-attachments/assets/33ff9c81-30b1-48d6-908b-935de911a26b" />
+
 
 ---
 
-### Terraform Output
+### Terraform Output & apply
 
-> Add screenshot here.
+<img width="1536" height="562" alt="image" src="https://github.com/user-attachments/assets/234e6670-7e72-44fc-bcbc-1f20d7f00e57" />
+
 
 ---
 
 ### AWS Console
 
-> Add screenshot here.
+<img width="1536" height="681" alt="image" src="https://github.com/user-attachments/assets/f00f6bb7-84bf-4997-a363-e0b089e1b3ef" />
+
 
 ---
 
@@ -401,6 +411,7 @@ version = "< 6.0"
 
 ```hcl
 source = "git::https://github.com/org/repo.git//path?ref=v1.2.0"
+
 ```
 
 ---
@@ -462,6 +473,9 @@ Consumed the module using:
 
 ```hcl
 source = "git::https://github.com/<username>/<repo>.git?ref=v1.0.0"
+
+<img width="1333" height="126" alt="image" src="https://github.com/user-attachments/assets/596b9d6f-870c-4498-b270-f96eec2ece21" />
+
 ```
 
 ---
