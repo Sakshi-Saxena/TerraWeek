@@ -1,128 +1,300 @@
-# ☁️ TerraWeek Day 3 — Providers, Resources & Your First Cloud Infra
+☁️ TerraWeek Day 03 – Providers, Resources & Your First Cloud Infrastructure
+Date: 14 July 2026
+Challenge: #TerraWeekChallenge
+Topic: Providers, Resources, Data Sources & AWS Infrastructure Provisioning
 
-**Date:** Tuesday, 14th July 2026
+📖 Overview
+Day 03 was my first step into provisioning real cloud infrastructure using Terraform and AWS.
 
-Time to touch **real cloud infrastructure**! Today you'll configure a **provider**, use **data sources** and **meta-arguments** (`for_each`, `count`, `depends_on`, `lifecycle`), and provision a small network + compute stack on the cloud of your choice. 🏗️
+I learned how Terraform interacts with cloud providers, the difference between resources and data sources, and how to provision a complete networking stack consisting of:
 
----
+VPC
+Public Subnet
+Internet Gateway
+Route Table
+Security Group
+EC2 Instance
+I also explored Terraform's powerful meta-arguments like count, for_each, depends_on, and lifecycle.
 
-## 🎯 Learning Goals
+🎯 Learning Objectives
+Configure Terraform providers and provider version pinning.
+Understand resources and data sources.
+Provision real cloud infrastructure on AWS.
+Learn and implement Terraform meta-arguments.
+Safely update and destroy infrastructure.
+📝 Task 1: Providers & Version Pinning
+Terraform Block
+terraform {
+  required_version = ">= 1.13"
 
-- Configure a **provider** properly with **version pinning** and **region**.
-- Understand **resources** vs **data sources**.
-- Use meta-arguments: **`count`**, **`for_each`**, **`depends_on`**, **`lifecycle`**.
-- Provision, update, and destroy real cloud resources safely.
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+Why Version Pinning Matters
+✅ Prevents unexpected breaking changes.
 
----
+✅ Ensures consistent behavior across different environments.
 
-## ⚙️ Setup: Authenticate Your Cloud
+✅ Keeps CI/CD pipelines reproducible.
 
-Pick **one** provider and configure its CLI (never hard-code credentials in `.tf` files!):
+✅ Makes collaboration easier because everyone uses the same provider version.
 
-- **AWS** → `aws configure` (uses `~/.aws/credentials`) — provider `hashicorp/aws ~> 6.0`
-- **Azure** → `az login` — provider `hashicorp/azurerm ~> 4.0`
-- **GCP** → `gcloud auth application-default login` — provider `hashicorp/google ~> 6.0`
-- **Utho** → API token env var — provider `uthoplatforms/utho`
+What does ~> mean?
+The ~> operator is called the pessimistic version constraint.
 
----
+Example:
 
-## 🗺️ 60-Second Networking Primer (read this first!)
+version = "~> 6.0"
+means:
 
-Today jumps from a single container to a real cloud network. Don't panic — here are the **6 building blocks** you'll create, in plain English:
+Allow:
+6.0
+6.1
+6.2
+6.5
+Do NOT allow:
+7.0
+This gives us bug fixes and minor updates while avoiding potentially breaking major version upgrades.
 
-| Block | What it is | Real-world analogy |
-|-------|------------|--------------------|
-| **VPC** | Your own private, isolated network in the cloud (a range of IPs like `10.0.0.0/16`) | Your own gated neighborhood |
-| **Subnet** | A slice of the VPC's IPs (`10.0.1.0/24`), lives in one Availability Zone | A street in that neighborhood |
-| **Internet Gateway (IGW)** | The door between your VPC and the public internet | The neighborhood's main gate |
-| **Route Table** | Rules that say "traffic for the internet → go via the IGW" | Road signs / GPS routes |
-| **Security Group (SG)** | A stateful virtual firewall on the instance (which ports are open) | A bouncer checking who gets in |
-| **EC2 Instance** | The actual virtual machine running your app | A house on the street |
+Bonus: Provider Aliases
+Terraform allows configuring multiple providers.
 
-**How they connect:** an **EC2 instance** lives in a **subnet**, inside a **VPC**. To reach the internet, the subnet's **route table** sends traffic through the **IGW**, and the **security group** decides which ports (e.g. 80/HTTP) are allowed in.
+Example:
 
-```
-Internet ──▶ [IGW] ──▶ [Route Table] ──▶ [ Public Subnet ] ──▶ [SG] ──▶ [EC2]
-                                          (inside the VPC)
-```
+provider "aws" {
+  region = "us-east-1"
+}
 
-> 💡 You'll build exactly this stack in Task 3. Re-read this table if a resource name ever feels confusing.
+provider "aws" {
+  alias  = "west"
+  region = "us-west-2"
+}
+When would we use this?
+Multi-region deployments
+Disaster recovery
+Cross-region backups
+Global applications
+📝 Task 2: Resources vs Data Sources
+Resources
+Resources create and manage infrastructure.
 
----
+Example:
 
-## 📝 Tasks
+resource "aws_instance" "web" {
+  ...
+}
+Examples:
 
-### Task 1: Providers & Version Pinning
-- Add a `terraform` block with `required_version` and `required_providers` (pin with `~>`).
-- Explain **why version pinning matters** and what the `~>` (pessimistic) operator does.
-- **Bonus:** configure a second provider **alias** (e.g. a second AWS region) and explain when you'd use it.
+EC2 Instances
+S3 Buckets
+VPCs
+Security Groups
+Data Sources
+Data sources only read existing information.
 
-### Task 2: Resources vs Data Sources
-- Create at least one **resource** (something new).
-- Use at least one **`data`** source to *read* existing info (e.g. `aws_ami`, `aws_availability_zones`, or your default VPC).
-- Explain the difference: **resources create/manage**, **data sources only read**.
+Example:
 
-### Task 3: Provision a Cloud Stack
-Use the **AWS starter code in [`./example`](./example)** (or adapt to Azure/GCP). It builds a minimal, free-tier-friendly stack:
-- a **VPC** + **public subnet** + **internet gateway** + **route table**
-- a **security group**
-- an **EC2 instance** using a **data source** to find the latest Amazon Linux 2023 AMI
+data "aws_ami" "al2023" {
+  ...
+}
+Examples:
 
-```bash
-cd example
+Existing AMIs
+Availability Zones
+Existing VPCs
+Existing Route Tables
+Difference Between Them
+Resource	Data Source
+Creates infrastructure	Reads existing information
+Managed by Terraform	Not managed by Terraform
+Can be modified by Terraform	Read-only
+Stored in state	Stored as reference data
+📝 Task 3: Provision a Cloud Stack
+Infrastructure Created
+Networking
+✅ VPC
+
+✅ Public Subnet
+
+✅ Internet Gateway
+
+✅ Route Table
+
+✅ Route Table Association
+
+Security
+✅ Security Group
+
+SSH Port (22)
+HTTP Port (80)
+Compute
+✅ EC2 Instance
+
+Latest Amazon Linux 2023 AMI
+Free-tier instance type
+User Data to install Nginx
+Architecture
+Internet
+    │
+    ▼
+[Internet Gateway]
+        │
+        ▼
+[Route Table]
+        │
+        ▼
+[Public Subnet]
+        │
+        ▼
+[Security Group]
+        │
+        ▼
+[EC2 Instance]
+Commands Executed
+Initialize
 terraform init
+Validate
 terraform validate
+Plan
 terraform plan
-terraform apply      # type: yes
-terraform state list # see everything Terraform now manages
-```
+Apply
+terraform apply
+View State
+terraform state list
+📸 Screenshots
+Terraform Plan
+image
+Terraform Apply
+image
+Running EC2 Instance
+image
+Nginx Welcome Page
+image
+📝 Task 4: Meta-Arguments in Action
+count
+Creates multiple identical resources.
 
-### Task 4: Meta-Arguments in Action
-Extend the config to practice each of these:
-- **`count`** — create N identical resources (e.g. N EC2 instances).
-- **`for_each`** — create resources from a `map`/`set` (preferred over `count` for named things).
-- **`depends_on`** — force an explicit ordering.
-- **`lifecycle`** — try `create_before_destroy`, `prevent_destroy`, and `ignore_changes`.
+Example:
 
-```hcl
+resource "aws_instance" "web" {
+  count = 2
+}
+When to use?
+Identical resources
+Simple scaling
+for_each
+Creates resources using unique keys.
+
+Example:
+
+for_each = toset(["dev", "test", "prod"])
+When to use?
+Resources with stable identities
+Named resources
+Easier updates and deletions
+depends_on
+Creates explicit dependencies.
+
+Example:
+
+depends_on = [
+  aws_internet_gateway.igw
+]
+Why?
+Ensures resources are created in the correct order.
+
+lifecycle
+Controls how Terraform manages resources.
+
+create_before_destroy
 lifecycle {
   create_before_destroy = true
-  ignore_changes        = [tags["LastModified"]]
 }
-```
+Creates replacement resources before destroying old ones.
 
-### Task 5: Update & Destroy
-- Change a `tag` or the `instance_type`, run `terraform plan`, and read the diff — notice what forces **replace** vs **in-place update**.
-- **Always** finish with:
-```bash
-terraform destroy   # type: yes  — avoid surprise bills!
-```
+prevent_destroy
+lifecycle {
+  prevent_destroy = true
+}
+Prevents accidental deletion.
 
----
+ignore_changes
+lifecycle {
+  ignore_changes = [
+    tags["LastModified"]
+  ]
+}
+Ignores specific attribute changes.
 
-> 📚 **Reference the companion repo:** study [`examples/for_each.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/for_each.tf) (for_each maps/sets + **dynamic blocks**) and [`examples/lifecycle.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/lifecycle.tf) (all four lifecycle patterns). The real infra in [`ec2.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/ec2.tf) / [`s3.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/s3.tf) / [`dynamodb.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/dynamodb.tf) shows the same concepts on live AWS.
+🧠 count vs for_each
+count
+Use when resources are:
 
-## 🧠 `count` vs `for_each` — which one?
-- Use **`count`** for N *identical, interchangeable* resources.
-- Use **`for_each`** when each instance has a *stable identity* (a name/key) — deleting one won't reindex the rest.
+Identical
+Interchangeable
+Indexed numerically
+for_each
+Use when resources:
 
----
+Have unique names
+Need stable identities
+Should not be reindexed when one is removed
+📝 Task 5: Update & Destroy
+Changes Performed
+Modified resource tags.
+Explored changing instance attributes.
+Observed the Terraform execution plan.
+What I Learned
+In-place Update
+Terraform modifies the existing resource.
 
-## 🍫 Bonus (Brownie Points)
-- Attach an Elastic IP, or add user-data to install Nginx on boot.
-- Use `terraform graph` and visualize the dependency graph.
-- Try the **`moved`** block to rename a resource without destroying it.
+Example:
 
----
+~ update in-place
+Resource Replacement
+Terraform destroys and recreates the resource.
 
-## 📤 What to Submit
-- Blog / LinkedIn / X post: your `terraform plan`/`apply` output, the AWS console showing your resources, and the diff when you changed something.
-- Push to your GitHub repo. Tag **#TrainWithShubham #TerraWeekChallenge**.
+Example:
 
----
+-/+ destroy and create replacement
+Cleanup
+Always destroy infrastructure after completing the exercise:
 
-📺 **Companion video:** [Terraform In One Shot](https://youtu.be/S9mohJI_R34) (Project 1 — EC2, S3, DynamoDB on AWS)
-💻 **Companion code:** [`ec2.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/ec2.tf), [`examples/for_each.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/for_each.tf), [`examples/lifecycle.tf`](https://github.com/LondheShubham153/terraform-for-devops/blob/main/examples/lifecycle.tf) · [AWS Provider docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
-💬 Questions? [Discord](https://discord.gg/hs3Pmc5F) / [Telegram](https://t.me/trainwithshubham).
+terraform destroy
+This helps avoid unexpected AWS charges.
 
-### Happy Terraforming! 🌍💻
+📸 Screenshots
+Terraform Destroy
+image
+🍫 Bonus Learnings
+✅ Installed Nginx using EC2 User Data.
+
+✅ Served a custom webpage from EC2.
+
+✅ Explored Terraform dependency graphs.
+
+✅ Learned about provider aliases and multi-region deployments.
+
+🎯 Key Takeaways
+Configured and authenticated AWS Provider.
+Understood Provider Version Pinning.
+Learned the difference between Resources and Data Sources.
+Provisioned my first complete AWS networking stack.
+Used Terraform meta-arguments.
+Learned the difference between in-place updates and resource replacements.
+Safely destroyed infrastructure after testing.
+🚀 Conclusion
+Day 03 was my first experience building real cloud infrastructure with Terraform.
+
+Understanding providers, resources, networking components, and meta-arguments makes Infrastructure as Code significantly more powerful and production-ready.
+
+Infrastructure isn't just about creating resources—it's about defining relationships, dependencies, and managing change safely through code.
+
+🙏 Acknowledgements
+A huge thank you to TrainWithShubham and Shubham Londhe for organizing the #TerraWeekChallenge and making Terraform concepts easy to understand.
+
+#Terraform #IaC #TerraformChallenge #TerraWeekChallenge #AWS #CloudComputing #DevOps #InfrastructureAsCode #CloudEngineer #TrainWithShubham
