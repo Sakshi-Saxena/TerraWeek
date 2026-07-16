@@ -37,11 +37,11 @@ locals {
   security_group_ids = [data.aws_security_group.default.id]
 }
 
-# 1) A single instance — pass inputs, read outputs.
+/*# 1) A single instance — pass inputs, read outputs.
 module "web_server" {
   source                 = "./modules/ec2_instance"
   name                   = "web"
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   environment            = "dev"
   ami                    = data.aws_ami.al2023.id
   subnet_id              = local.subnet_id
@@ -50,17 +50,49 @@ module "web_server" {
   tags = {
     Role = "frontend"
   }
-}
+}*/
 
-# 2) Modular composition: the SAME module, instantiated many times with for_each.
-module "servers" {
+#2) Modular composition: the SAME module, instantiated many times with for_each.
+/*module "servers" {
   source   = "./modules/ec2_instance"
+  #source = "git::ssh://git@github.com/Sakshi-Saxena/terraform-aws-ec2-module.git?ref=v1.0.0" //consuming module from git repo
   for_each = toset(["app", "worker", "cache"])
 
   name                   = each.key
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   environment            = "dev"
   ami                    = data.aws_ami.al2023.id
   subnet_id              = local.subnet_id
   vpc_security_group_ids = local.security_group_ids
+}*/
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"   # ✅ always pin registry/git module versions
+
+  name = "terraweek-vpc"
+  cidr = "10.0.0.0/16"
+
+  azs = [
+    "us-east-1a",
+    "us-east-1b"
+  ]
+
+  public_subnets = [
+    "10.0.1.0/24",
+    "10.0.2.0/24"
+  ]
+
+  private_subnets = [
+    "10.0.101.0/24",
+    "10.0.102.0/24"
+  ]
+
+  enable_nat_gateway = false
+  enable_vpn_gateway = false
+
+  tags = {
+    Terraform = "true"
+    Project   = "TerraWeek-Day05"
+  }
 }
