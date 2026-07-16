@@ -1,4 +1,3 @@
-````markdown
 # 📦 TerraWeek Day 05 – Modules: Reusable, Composable Infrastructure
 
 > **Date:** 16 July 2026  
@@ -373,7 +372,7 @@ Does NOT allow:
 
 ---
 
-### Terraform Output & apply
+### Terraform apply & Outputs
 
 <img width="1536" height="562" alt="image" src="https://github.com/user-attachments/assets/234e6670-7e72-44fc-bcbc-1f20d7f00e57" />
 
@@ -533,4 +532,4 @@ A huge thank you to **TrainWithShubham** and **Shubham Londhe** for organizing t
 ---
 
 #Terraform #IaC #TerraformChallenge #TerraWeekChallenge #TerraformModules #AWS #CloudComputing #DevOps #InfrastructureAsCode #CloudEngineer #TrainWithShubham
-````
+
