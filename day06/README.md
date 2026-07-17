@@ -12,7 +12,7 @@ AWS | Terraform | Docker | Kubernetes | CI/CD | Linux | GitHub Actions
 
 # 📌 Project Repository
 
-🔗 **GitHub Repository:** `https://github.com/Sakshi-Saxena/terraform-2tier-app/tree/main`
+🔗 **GitHub Repository:** https://github.com/Sakshi-Saxena/terraform-2tier-app/tree/main
 
 ---
 
